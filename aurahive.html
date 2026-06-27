@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURAHIVE – Curated Picks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#C9A84C;--gold-light:#E8C96A;--gold-dark:#9A7B2A;
+  --black:#0A0A0A;--black2:#111111;--black3:#1A1A1A;--black4:#222222;
+  --gray:#888;--gray2:#555;--gray3:#333;
+  --white:#FAFAFA;
+  --font-display:'Cormorant Garamond',serif;
+  --font-body:'Montserrat',sans-serif;
+}
+body{background:var(--black);color:var(--white);font-family:var(--font-body);min-height:100vh;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.2);padding:0 2rem}
+.nav-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:var(--font-display);font-size:1.9rem;font-weight:600;letter-spacing:0.18em;color:var(--gold);cursor:pointer}
+.logo span{color:var(--white);font-weight:300}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-link{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gray);cursor:pointer;transition:color 0.2s;padding:0.4rem 0;border-bottom:1px solid transparent}
+.nav-link:hover,.nav-link.active{color:var(--gold);border-bottom-color:var(--gold)}
+.nav-right{display:flex;align-items:center;gap:1.2rem}
+.btn-admin{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;padding:0.55rem 1.2rem;border:1px solid rgba(201,168,76,0.5);color:var(--gold);background:transparent;cursor:pointer;transition:all 0.2s;font-family:var(--font-body)}
+.btn-admin:hover{background:var(--gold);color:var(--black)}
+
+/* HERO */
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding-top:68px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(201,168,76,0.08) 0%,transparent 70%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px);background-size:60px 60px}
+.hero-content{position:relative;z-index:2}
+.hero-eyebrow{font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem}
+.hero-title{font-family:var(--font-display);font-size:clamp(3.5rem,8vw,7rem);font-weight:300;line-height:1.05;color:var(--white);margin-bottom:0.5rem}
+.hero-title em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin:1.8rem 0 2.5rem}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-gold{padding:0.9rem 2.5rem;background:var(--gold);color:var(--black);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;font-family:var(--font-body);font-weight:600;cursor:pointer;border:none;transition:all 0.2s}
+.btn-gold:hover{background:var(--gold-light)}
+.btn-outline{padding:0.9rem 2.5rem;background:transparent;color:var(--gold);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;font-family:var(--font-body);border:1px solid var(--gold);cursor:pointer;transition:all 0.2s}
+.btn-outline:hover{background:rgba(201,168,76,0.1)}
+
+/* SECTION DIVIDER */
+.section-div{display:flex;align-items:center;gap:1.5rem;margin-bottom:3rem}
+.div-line{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,0.4),transparent)}
+.div-text{font-size:0.6rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+
+/* GENDER TABS */
+.gender-section{padding:5rem 2rem 2rem}
+.gender-section .inner{max-width:1300px;margin:0 auto}
+.gender-tabs{display:flex;border-bottom:1px solid var(--gray3);margin-bottom:3.5rem}
+.gender-tab{font-family:var(--font-display);font-size:1.4rem;padding:0.8rem 2.5rem;cursor:pointer;color:var(--gray2);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.2s;letter-spacing:0.05em}
+.gender-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.gender-tab:hover:not(.active){color:var(--white)}
+
+/* CATEGORY FILTER */
+.category-bar{display:flex;gap:0.6rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.cat-btn{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;padding:0.45rem 1.1rem;border:1px solid var(--gray3);color:var(--gray);background:transparent;cursor:pointer;transition:all 0.2s;font-family:var(--font-body)}
+.cat-btn.active,.cat-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* PRODUCT GRID */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2px}
+.product-card{background:var(--black2);position:relative;overflow:hidden;cursor:pointer;transition:transform 0.3s}
+.product-card:hover{transform:scale(1.01)}
+.product-card:hover .card-overlay{opacity:1}
+.card-img{width:100%;aspect-ratio:3/4;background:var(--black3);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.card-img-placeholder{font-family:var(--font-display);font-size:3rem;color:rgba(201,168,76,0.15);font-style:italic;user-select:none}
+.card-img img{width:100%;height:100%;object-fit:cover}
+.card-overlay{position:absolute;inset:0;background:rgba(10,10,10,0.7);opacity:0;transition:opacity 0.3s;display:flex;align-items:center;justify-content:center}
+.card-shop-btn{padding:0.7rem 1.8rem;background:var(--gold);color:var(--black);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;font-family:var(--font-body);border:none;cursor:pointer}
+.card-body{padding:1.1rem 1.2rem}
+.card-source{display:inline-block;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;padding:0.25rem 0.6rem;background:rgba(201,168,76,0.12);color:var(--gold);margin-bottom:0.6rem}
+.card-title{font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);margin-bottom:0.35rem;line-height:1.3}
+.card-cat{font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:0.6rem}
+.card-price{font-size:0.9rem;color:var(--gold);font-weight:500}
+.card-delete{position:absolute;top:0.7rem;right:0.7rem;width:28px;height:28px;background:rgba(10,10,10,0.8);border:1px solid rgba(201,168,76,0.3);color:var(--gold);display:none;align-items:center;justify-content:center;cursor:pointer;font-size:0.75rem;z-index:10}
+.admin-mode .card-delete{display:flex}
+.empty-state{grid-column:1/-1;text-align:center;padding:5rem 2rem;color:var(--gray2)}
+.empty-state h3{font-family:var(--font-display);font-size:1.8rem;font-weight:300;margin-bottom:0.5rem;color:var(--gray)}
+.empty-state p{font-size:0.72rem;letter-spacing:0.1em;color:var(--gray2)}
+
+/* FOOTER */
+footer{background:var(--black2);border-top:1px solid var(--gray3);padding:3rem 2rem;text-align:center;margin-top:5rem}
+footer .logo-f{font-family:var(--font-display);font-size:1.5rem;color:var(--gold);letter-spacing:0.2em;margin-bottom:0.8rem}
+footer p{font-size:0.62rem;letter-spacing:0.15em;color:var(--gray2);text-transform:uppercase}
+
+/* ─── MODALS ─── */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;align-items:center;justify-content:center;padding:1rem}
+.modal-bg.show{display:flex}
+.modal{background:var(--black3);border:1px solid rgba(201,168,76,0.25);max-width:480px;width:100%;padding:2.5rem;position:relative}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--gray);cursor:pointer;font-size:1.2rem;line-height:1}
+.modal-title{font-family:var(--font-display);font-size:1.8rem;font-weight:300;color:var(--gold);margin-bottom:0.3rem}
+.modal-sub{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:2rem}
+.form-group{margin-bottom:1.2rem}
+.form-label{display:block;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:0.5rem}
+.form-input,.form-select,.form-textarea{width:100%;background:var(--black4);border:1px solid var(--gray3);color:var(--white);padding:0.75rem 1rem;font-family:var(--font-body);font-size:0.85rem;outline:none;transition:border-color 0.2s}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:rgba(201,168,76,0.5)}
+.form-select option{background:var(--black3)}
+.form-textarea{height:80px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-error{font-size:0.65rem;color:#E24B4A;margin-top:0.8rem;letter-spacing:0.05em}
+.btn-full{width:100%;padding:0.9rem;background:var(--gold);color:var(--black);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;font-family:var(--font-body);border:none;cursor:pointer;transition:background 0.2s;margin-top:0.5rem}
+.btn-full:hover{background:var(--gold-light)}
+.admin-bar{display:none;background:var(--black2);border-bottom:1px solid rgba(201,168,76,0.3);padding:0.6rem 2rem}
+.admin-bar.show{display:block}
+.admin-bar-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.admin-bar-text{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold)}
+.admin-bar-actions{display:flex;gap:0.8rem}
+.btn-sm{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.4rem 1rem;cursor:pointer;font-family:var(--font-body);border:1px solid;transition:all 0.2s}
+.btn-sm-gold{border-color:var(--gold);color:var(--gold);background:transparent}
+.btn-sm-gold:hover{background:var(--gold);color:var(--black)}
+.btn-sm-danger{border-color:#E24B4A;color:#E24B4A;background:transparent}
+.btn-sm-danger:hover{background:#E24B4A;color:#fff}
+
+/* categories tag pills in add modal */
+.cat-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.4rem}
+.cat-tag{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.3rem 0.7rem;background:var(--black4);border:1px solid var(--gray3);color:var(--gray);cursor:pointer;transition:all 0.2s}
+.cat-tag.sel{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.08)}
+
+/* IMAGE UPLOAD */
+.img-upload-area{border:1px dashed var(--gray3);padding:1.5rem;text-align:center;cursor:pointer;transition:border-color 0.2s;position:relative}
+.img-upload-area:hover{border-color:var(--gold)}
+.img-upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.img-upload-text{font-size:0.65rem;color:var(--gray);letter-spacing:0.1em}
+.img-preview{max-height:120px;max-width:100%;object-fit:contain;margin-top:0.5rem;display:none}
+
+/* MANAGE CATEGORIES MODAL */
+.cat-manage-list{list-style:none;margin-bottom:1rem}
+.cat-manage-item{display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--gray3)}
+.cat-manage-name{font-size:0.8rem;color:var(--white)}
+.cat-manage-gender{font-size:0.6rem;color:var(--gray);margin-left:0.5rem}
+.cat-del-btn{background:none;border:none;color:#E24B4A;cursor:pointer;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase}
+.add-cat-row{display:flex;gap:0.5rem}
+.add-cat-row .form-input{flex:1}
+.add-cat-row .form-select{width:110px}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--black3);border:1px solid rgba(201,168,76,0.4);padding:0.9rem 1.5rem;font-size:0.7rem;letter-spacing:0.1em;color:var(--gold);z-index:2000;transform:translateY(20px);opacity:0;transition:all 0.3s;pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* SCROLL BTN */
+.scroll-top{position:fixed;bottom:2rem;left:2rem;width:40px;height:40px;border:1px solid rgba(201,168,76,0.3);background:var(--black3);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;opacity:0;transition:opacity 0.3s;z-index:90}
+.scroll-top.show{opacity:1}
+
+/* responsive */
+@media(max-width:600px){
+  .nav-links{display:none}
+  .form-row{grid-template-columns:1fr}
+  .hero-title{font-size:2.8rem}
+  .gender-tab{padding:0.6rem 1.2rem;font-size:1.1rem}
+  .admin-bar-text{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ADMIN BAR -->
+<div class="admin-bar" id="adminBar">
+  <div class="admin-bar-inner">
+    <span class="admin-bar-text">✦ Admin Mode Active</span>
+    <div class="admin-bar-actions">
+      <button class="btn-sm btn-sm-gold" onclick="openAddProduct()">+ Add Product</button>
+      <button class="btn-sm btn-sm-gold" onclick="openManageCategories()">Manage Categories</button>
+      <button class="btn-sm btn-sm-danger" onclick="logout()">Log Out</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="scrollToTop()">AURA<span>HIVE</span></div>
+    <div class="nav-links">
+      <span class="nav-link active" onclick="filterGender('all')">All</span>
+      <span class="nav-link" onclick="filterGender('women')">Women</span>
+      <span class="nav-link" onclick="filterGender('men')">Men</span>
+    </div>
+    <div class="nav-right">
+      <button class="btn-admin" onclick="openLogin()" id="adminBtn">Admin</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Curated Affiliate Picks</div>
+    <h1 class="hero-title">Elevate Your<br><em>Aesthetic</em></h1>
+    <p class="hero-sub">Hand-picked finds from the world's best stores</p>
+    <div class="hero-btns">
+      <button class="btn-gold" onclick="scrollToProducts()">Shop Women</button>
+      <button class="btn-outline" onclick="scrollToProducts('men')">Shop Men</button>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS SECTION -->
+<section class="gender-section" id="productsSection">
+  <div class="inner">
+    <div class="section-div">
+      <div class="div-line"></div>
+      <div class="div-text">✦ Featured Picks ✦</div>
+      <div class="div-line"></div>
+    </div>
+
+    <div class="gender-tabs">
+      <div class="gender-tab active" onclick="filterGender('all')" id="tab-all">All Picks</div>
+      <div class="gender-tab" onclick="filterGender('women')" id="tab-women">Women</div>
+      <div class="gender-tab" onclick="filterGender('men')" id="tab-men">Men</div>
+    </div>
+
+    <div class="category-bar" id="categoryBar"></div>
+
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo-f">AURAHIVE</div>
+  <p>Curated affiliate picks · All links redirect to original stores</p>
+</footer>
+
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ═══ MODALS ═══ -->
+
+<!-- LOGIN MODAL -->
+<div class="modal-bg" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+    <div class="modal-title">Admin Access</div>
+    <div class="modal-sub">Authorised personnel only</div>
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <input class="form-input" type="email" id="loginEmail" placeholder="your@email.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input class="form-input" type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <div class="form-error" id="loginError"></div>
+    <button class="btn-full" onclick="doLogin()">Sign In</button>
+  </div>
+</div>
+
+<!-- ADD PRODUCT MODAL -->
+<div class="modal-bg" id="addModal">
+  <div class="modal" style="max-width:540px">
+    <button class="modal-close" onclick="closeModal('addModal')">✕</button>
+    <div class="modal-title" id="addModalTitle">Add Product</div>
+    <div class="modal-sub">This will appear live on the site</div>
+
+    <div class="form-group">
+      <label class="form-label">Product Name</label>
+      <input class="form-input" id="pName" placeholder="e.g. Floral Midi Dress">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Price (₹ or $)</label>
+        <input class="form-input" id="pPrice" placeholder="₹1,499">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Source / Store</label>
+        <select class="form-select" id="pSource">
+          <option value="Myntra">Myntra</option>
+          <option value="Amazon">Amazon</option>
+          <option value="Flipkart">Flipkart</option>
+          <option value="Nykaa">Nykaa</option>
+          <option value="Ajio">Ajio</option>
+          <option value="Meesho">Meesho</option>
+          <option value="Zara">Zara</option>
+          <option value="H&M">H&M</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Affiliate Link (redirect URL)</label>
+      <input class="form-input" id="pLink" placeholder="https://...">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Section</label>
+      <div style="display:flex;gap:1rem;margin-top:0.4rem">
+        <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:var(--white)"><input type="radio" name="pGender" value="women" id="gWomen" checked style="accent-color:var(--gold)"> Women</label>
+        <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:var(--white)"><input type="radio" name="pGender" value="men" id="gMen" style="accent-color:var(--gold)"> Men</label>
+        <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;font-size:0.75rem;color:var(--white)"><input type="radio" name="pGender" value="all" id="gAll" style="accent-color:var(--gold)"> Both</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Category</label>
+      <div class="cat-tags" id="catTagsContainer"></div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Product Image</label>
+      <div class="img-upload-area" id="imgUploadArea">
+        <input type="file" accept="image/*" onchange="handleImageUpload(event)">
+        <div class="img-upload-text">Click or drag an image here</div>
+        <img class="img-preview" id="imgPreview" alt="preview">
+      </div>
+      <div style="margin-top:0.5rem">
+        <label class="form-label">Or paste image URL</label>
+        <input class="form-input" id="pImageUrl" placeholder="https://... (optional)" oninput="previewFromUrl(this.value)">
+      </div>
+    </div>
+
+    <div class="form-error" id="addError"></div>
+    <button class="btn-full" onclick="saveProduct()">Publish Product</button>
+  </div>
+</div>
+
+<!-- MANAGE CATEGORIES MODAL -->
+<div class="modal-bg" id="catModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('catModal')">✕</button>
+    <div class="modal-title">Categories</div>
+    <div class="modal-sub">Add or remove categories for products</div>
+    <ul class="cat-manage-list" id="catManageList"></ul>
+    <div class="add-cat-row">
+      <input class="form-input" id="newCatName" placeholder="New category name">
+      <select class="form-select" id="newCatGender">
+        <option value="all">All</option>
+        <option value="women">Women</option>
+        <option value="men">Men</option>
+      </select>
+      <button class="btn-sm btn-sm-gold" onclick="addCategory()">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── STATE ───
+const ADMIN_EMAIL = 'edwinbinoy504@gmail.com';
+const ADMIN_PASS  = 'aurahive2024'; // change after download
+
+let state = {
+  isAdmin: false,
+  activeGender: 'all',
+  activeCategory: 'all',
+  editingId: null,
+  uploadedImageData: null,
+  categories: JSON.parse(localStorage.getItem('ah_cats') || 'null') || [
+    {id:'c1',name:'Dresses',gender:'women'},
+    {id:'c2',name:'Tops',gender:'women'},
+    {id:'c3',name:'Bags',gender:'women'},
+    {id:'c4',name:'Jewellery',gender:'women'},
+    {id:'c5',name:'Footwear',gender:'all'},
+    {id:'c6',name:'Skincare',gender:'all'},
+    {id:'c7',name:'Shirts',gender:'men'},
+    {id:'c8',name:'Trousers',gender:'men'},
+    {id:'c9',name:'Watches',gender:'men'},
+    {id:'c10',name:'Accessories',gender:'all'},
+  ],
+  products: JSON.parse(localStorage.getItem('ah_products') || 'null') || []
+};
+
+// ─── PERSIST ───
+function save(){
+  localStorage.setItem('ah_cats', JSON.stringify(state.categories));
+  localStorage.setItem('ah_products', JSON.stringify(state.products));
+}
+
+// ─── TOAST ───
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ─── MODALS ───
+function openLogin(){if(state.isAdmin){toast('Already signed in');return}document.getElementById('loginModal').classList.add('show')}
+function closeModal(id){document.getElementById(id).classList.remove('show')}
+document.querySelectorAll('.modal-bg').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')}));
+
+// ─── AUTH ───
+function doLogin(){
+  const em=document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pw=document.getElementById('loginPass').value;
+  const err=document.getElementById('loginError');
+  if(em!==ADMIN_EMAIL){err.textContent='Access denied. Unauthorised email.';return}
+  if(pw!==ADMIN_PASS){err.textContent='Incorrect password.';return}
+  state.isAdmin=true;
+  document.body.classList.add('admin-mode');
+  document.getElementById('adminBar').classList.add('show');
+  document.getElementById('adminBtn').textContent='Dashboard';
+  document.getElementById('adminBtn').onclick=()=>toast('You are in admin mode');
+  closeModal('loginModal');
+  toast('Welcome back, Edwin ✦');
+}
+function logout(){
+  state.isAdmin=false;
+  document.body.classList.remove('admin-mode');
+  document.getElementById('adminBar').classList.remove('show');
+  document.getElementById('adminBtn').textContent='Admin';
+  document.getElementById('adminBtn').onclick=openLogin;
+  toast('Signed out');
+}
+
+// ─── GENDER FILTER ───
+function filterGender(g){
+  state.activeGender=g;state.activeCategory='all';
+  document.querySelectorAll('.gender-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+g)?.classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(n=>n.classList.remove('active'));
+  if(g==='all')document.querySelectorAll('.nav-link')[0].classList.add('active');
+  if(g==='women')document.querySelectorAll('.nav-link')[1].classList.add('active');
+  if(g==='men')document.querySelectorAll('.nav-link')[2].classList.add('active');
+  renderCategoryBar();renderGrid();
+}
+
+// ─── CATEGORY BAR ───
+function renderCategoryBar(){
+  const bar=document.getElementById('categoryBar');
+  const g=state.activeGender;
+  const cats=state.categories.filter(c=>g==='all'||c.gender===g||c.gender==='all');
+  bar.innerHTML=`<button class="cat-btn ${state.activeCategory==='all'?'active':''}" onclick="filterCat('all')">All</button>`
+    +cats.map(c=>`<button class="cat-btn ${state.activeCategory===c.id?'active':''}" onclick="filterCat('${c.id}')">${c.name}</button>`).join('');
+}
+function filterCat(id){state.activeCategory=id;renderCategoryBar();renderGrid()}
+
+// ─── PRODUCT GRID ───
+function renderGrid(){
+  const grid=document.getElementById('productGrid');
+  let products=state.products;
+  if(state.activeGender!=='all') products=products.filter(p=>p.gender===state.activeGender||p.gender==='all');
+  if(state.activeCategory!=='all') products=products.filter(p=>p.categoryId===state.activeCategory);
+
+  if(!products.length){
+    grid.innerHTML=`<div class="empty-state"><h3>No products yet</h3><p>${state.isAdmin?'Click "Add Product" to publish your first pick':'Check back soon for curated picks'}</p></div>`;
+    return;
+  }
+  grid.innerHTML=products.map(p=>productCard(p)).join('');
+}
+function productCard(p){
+  const cat=state.categories.find(c=>c.id===p.categoryId);
+  const imgHtml=p.image
+    ?`<img src="${escHtml(p.image)}" alt="${escHtml(p.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+    :'';
+  return `<div class="product-card">
+    <button class="card-delete" onclick="deleteProduct('${p.id}',event)" title="Delete">✕</button>
+    <div class="card-img">
+      ${imgHtml}
+      <div class="card-img-placeholder" style="${p.image?'display:none':''}">${p.name[0]||'A'}</div>
+      <div class="card-overlay">
+        <button class="card-shop-btn" onclick="shopNow('${p.id}',event)">Shop Now ↗</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <span class="card-source">${escHtml(p.source)}</span>
+      <div class="card-title">${escHtml(p.name)}</div>
+      ${cat?`<div class="card-cat">${escHtml(cat.name)}</div>`:''}
+      <div class="card-price">${escHtml(p.price)}</div>
+    </div>
+  </div>`;
+}
+function escHtml(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML}
+function shopNow(id,e){
+  e.stopPropagation();
+  const p=state.products.find(x=>x.id===id);
+  if(p&&p.link){window.open(p.link,'_blank')}else{toast('No link available')}
+}
+function deleteProduct(id,e){
+  e.stopPropagation();
+  if(!confirm('Remove this product?'))return;
+  state.products=state.products.filter(p=>p.id!==id);
+  save();renderGrid();toast('Product removed');
+}
+
+// ─── ADD PRODUCT ───
+let selectedCatId=null;
+function openAddProduct(){
+  state.editingId=null;selectedCatId=null;state.uploadedImageData=null;
+  document.getElementById('addModalTitle').textContent='Add Product';
+  document.getElementById('pName').value='';
+  document.getElementById('pPrice').value='';
+  document.getElementById('pLink').value='';
+  document.getElementById('pImageUrl').value='';
+  document.getElementById('imgPreview').style.display='none';
+  document.getElementById('addError').textContent='';
+  document.getElementById('gWomen').checked=true;
+  renderCatTags();
+  document.getElementById('addModal').classList.add('show');
+}
+function renderCatTags(){
+  const g=document.querySelector('input[name="pGender"]:checked')?.value||'all';
+  const cats=state.categories.filter(c=>g==='all'||c.gender===g||c.gender==='all');
+  document.getElementById('catTagsContainer').innerHTML=cats.map(c=>`<span class="cat-tag ${selectedCatId===c.id?'sel':''}" onclick="selectCatTag('${c.id}')">${c.name}</span>`).join('');
+}
+document.querySelectorAll('input[name="pGender"]').forEach(r=>r.addEventListener('change',renderCatTags));
+function selectCatTag(id){selectedCatId=id;renderCatTags()}
+function handleImageUpload(e){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    state.uploadedImageData=ev.target.result;
+    const prev=document.getElementById('imgPreview');
+    prev.src=ev.target.result;prev.style.display='block';
+    document.getElementById('pImageUrl').value='';
+  };
+  reader.readAsDataURL(file);
+}
+function previewFromUrl(url){
+  if(!url)return;state.uploadedImageData=null;
+  const prev=document.getElementById('imgPreview');prev.src=url;prev.style.display='block';
+}
+function saveProduct(){
+  const name=document.getElementById('pName').value.trim();
+  const price=document.getElementById('pPrice').value.trim();
+  const link=document.getElementById('pLink').value.trim();
+  const source=document.getElementById('pSource').value;
+  const gender=document.querySelector('input[name="pGender"]:checked')?.value||'women';
+  const imageUrl=document.getElementById('pImageUrl').value.trim();
+  const image=state.uploadedImageData||imageUrl||'';
+  const err=document.getElementById('addError');
+  if(!name){err.textContent='Product name is required.';return}
+  if(!link){err.textContent='Affiliate link is required.';return}
+  if(!link.startsWith('http')){err.textContent='Link must start with http:// or https://';return}
+  err.textContent='';
+  const product={
+    id:'p'+Date.now(),name,price,link,source,gender,
+    categoryId:selectedCatId,image,
+    createdAt:Date.now()
+  };
+  state.products.unshift(product);
+  save();renderGrid();closeModal('addModal');toast('Product published ✦');
+}
+
+// ─── CATEGORIES ───
+function openManageCategories(){
+  renderCatManageList();
+  document.getElementById('catModal').classList.add('show');
+}
+function renderCatManageList(){
+  const ul=document.getElementById('catManageList');
+  ul.innerHTML=state.categories.map(c=>`<li class="cat-manage-item">
+    <span class="cat-manage-name">${escHtml(c.name)}<span class="cat-manage-gender">[${c.gender}]</span></span>
+    <button class="cat-del-btn" onclick="deleteCat('${c.id}')">Remove</button>
+  </li>`).join('');
+}
+function addCategory(){
+  const name=document.getElementById('newCatName').value.trim();
+  const gender=document.getElementById('newCatGender').value;
+  if(!name){toast('Enter a name');return}
+  if(state.categories.find(c=>c.name.toLowerCase()===name.toLowerCase())){toast('Category exists');return}
+  state.categories.push({id:'c'+Date.now(),name,gender});
+  save();renderCatManageList();renderCategoryBar();renderGrid();
+  document.getElementById('newCatName').value='';
+  toast('Category added');
+}
+function deleteCat(id){
+  state.categories=state.categories.filter(c=>c.id!==id);
+  state.products.forEach(p=>{if(p.categoryId===id)p.categoryId=null});
+  save();renderCatManageList();renderCategoryBar();renderGrid();
+  toast('Category removed');
+}
+
+// ─── SCROLL ───
+function scrollToProducts(gender){
+  if(gender)filterGender(gender);
+  document.getElementById('productsSection').scrollIntoView({behavior:'smooth'});
+}
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'})}
+window.addEventListener('scroll',()=>{
+  document.getElementById('scrollTopBtn').classList.toggle('show',window.scrollY>400)
+});
+
+// ─── INIT ───
+renderCategoryBar();
+renderGrid();
+</script>
+</body>
+</html>
